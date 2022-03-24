@@ -32,14 +32,7 @@ namespace Entity.MovementControl
 
         private void BounceOffWall(Vector3 collisionResolveVelocity)
         {
-            if (!Mathf.Approximately(collisionResolveVelocity.x, 0))
-            {
-                _currentVelocity.x *= -1;
-            }
-            if (!Mathf.Approximately(collisionResolveVelocity.z, 0))
-            {
-                _currentVelocity.z *= -1;
-            }
+            _currentVelocity += 2 * collisionResolveVelocity;
         }
     }
 }
