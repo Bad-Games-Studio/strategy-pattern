@@ -2,7 +2,6 @@ using System;
 using Entity.MovementControl;
 using Level;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Entity
 {
