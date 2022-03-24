@@ -1,4 +1,5 @@
 using UnityEngine;
+using Util;
 
 namespace Entity.MovementControl
 {
@@ -12,9 +13,6 @@ namespace Entity.MovementControl
         private const float MinTimeToMove = 0.3f;
         private const float MaxTimeToMove = 5.0f;
 
-        private const float MinVelocityDirection = -1.0f;
-        private const float MaxVelocityDirection = 1.0f;
-        
         private float _timer;
         private Vector3 _currentVelocity;
 
@@ -47,11 +45,7 @@ namespace Entity.MovementControl
         {
             var speed = Random.Range(MinSpeed, MaxSpeed);
 
-            var x = Random.Range(MinVelocityDirection, MaxVelocityDirection);
-            var z = Random.Range(MinVelocityDirection, MaxVelocityDirection);
-            var direction = new Vector3(x, 0, z).normalized;
-
-            return speed * direction;
+            return speed * Vector3Extension.RandomDirection();
         }
     }
 }
