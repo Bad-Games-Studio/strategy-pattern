@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Entity.MovementControl
 {
-    public class PlayerInputVelocity : IVelocityController
+    public class PlayerInputVelocityController : IVelocityController
     {
         public string Name => "Manual";
 

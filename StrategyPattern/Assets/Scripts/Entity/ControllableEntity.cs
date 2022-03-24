@@ -40,9 +40,9 @@ namespace Entity
         {
             return _velocityController switch
             {
-                PlayerInputVelocity _ => new RandomVelocity(),
-                RandomVelocity _ => new PlayerInputVelocity(),
-                _ => new PlayerInputVelocity()
+                PlayerInputVelocityController _ => new RandomVelocityController(),
+                RandomVelocityController _ => new PlayerInputVelocityController(),
+                _ => new PlayerInputVelocityController()
             };
         }
     }

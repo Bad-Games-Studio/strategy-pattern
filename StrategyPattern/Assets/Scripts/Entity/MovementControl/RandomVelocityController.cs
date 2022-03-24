@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Entity.MovementControl
 {
-    public class RandomVelocity : IVelocityController
+    public class RandomVelocityController : IVelocityController
     {
         public string Name => "Random";
 
@@ -18,7 +18,7 @@ namespace Entity.MovementControl
         private float _timer;
         private Vector3 _currentVelocity;
 
-        public RandomVelocity()
+        public RandomVelocityController()
         {
             _timer = -1;
         }
