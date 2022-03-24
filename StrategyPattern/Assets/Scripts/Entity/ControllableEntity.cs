@@ -1,5 +1,6 @@
 using System;
 using Entity.MovementControl;
+using Level;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,8 @@ namespace Entity
         private IVelocityController _velocityController;
         private Rigidbody _rigidbody;
 
-        public event Action<string> OnCurrentModeChanged;
+        public event Action<string> OnVelocityControllerChanged;
+        public event Action<Vector3> OnWallHit;
         
         private void Start()
         {
@@ -33,7 +35,7 @@ namespace Entity
             }
             
             _velocityController = NewVelocityController();
-            OnCurrentModeChanged?.Invoke(_velocityController.Name);
+            OnVelocityControllerChanged?.Invoke(_velocityController.Name);
         }
         
         private IVelocityController NewVelocityController()
@@ -41,9 +43,21 @@ namespace Entity
             return _velocityController switch
             {
                 PlayerInputVelocityController _ => new RandomVelocityController(),
-                RandomVelocityController _ => new PlayerInputVelocityController(),
+                RandomVelocityController _ => new DvdVelocityController(this),
+                DvdVelocityController _ => new PlayerInputVelocityController(),
                 _ => new PlayerInputVelocityController()
             };
+        }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collision.gameObject.TryGetComponent<WallCollision>(out _))
+            {
+                return;
+            }
+
+            var resolveVelocity = collision.impulse / _rigidbody.mass;
+            OnWallHit?.Invoke(resolveVelocity);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace UI
         {
             _currentMode = GetComponent<Text>();
             _entity = referenceObject.GetComponent<ControllableEntity>();
-            _entity.OnCurrentModeChanged += UpdateText;
+            _entity.OnVelocityControllerChanged += UpdateText;
         }
 
         private void OnDisable()
         {
-            _entity.OnCurrentModeChanged -= UpdateText;
+            _entity.OnVelocityControllerChanged -= UpdateText;
         }
 
         private void UpdateText(string newText)
